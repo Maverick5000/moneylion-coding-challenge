@@ -1,11 +1,5 @@
-build:
-	@go build -o bin/api
-
-run: build
-	@./bin/api
-
 test:
-	@go test -v ./...
+	@cd ./api && go test -v ./...
 
 up: 
 	@docker-compose up --build

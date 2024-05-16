@@ -6,15 +6,15 @@ import { AxiosError, AxiosResponse } from "axios";
  * @returns {IcontentCard[]}
  * @description Hook to fetch feed data from a specified API endpoint.
  */
-const httpClient = new HttpClient("https://stoplight.io", {
+const httpClient = new HttpClient("http://api:8080", {
   "Content-Type": "application/json",
 });
 
 const useGetFeedData = async () => {
   const response = await httpClient
-    .get("/mocks/engine/fullstack-spec/52502230/content")
+    .get("/feed")
     .then((response: AxiosResponse) => {
-      return response.data.contentCards as IContentCard[];
+      return response.data as IContentCard[];
     })
     .catch((error: AxiosError) => {
       throw error;
