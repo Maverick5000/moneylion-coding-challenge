@@ -97,6 +97,7 @@ func FeedHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Set response headers
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Prefer", "code=200, dynamic=true")
 	w.WriteHeader(http.StatusOK)
 	// Encode the data into JSON and write it to the response body
 	err = json.NewEncoder(w).Encode(data)

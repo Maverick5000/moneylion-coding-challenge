@@ -2,9 +2,11 @@
 import useTruncatedElement from "@/hooks/useTruncatedElement";
 import type { IContentCard } from "@/types/IContentCard";
 import Image from "next/image";
-import { memo, useRef } from "react";
+import { memo, useRef, useState } from "react";
+import Comments from "./Comments";
 
 const ContentCard = ({ data }: { data: IContentCard }) => {
+  const [showComments, setShowComments] = useState(false);
   const ref = useRef(null);
   const { isTruncated, isReadingMore, setIsReadingMore } = useTruncatedElement({
     ref,
@@ -19,9 +21,8 @@ const ContentCard = ({ data }: { data: IContentCard }) => {
         width={0}
         height={0}
         sizes="100vw"
+        className="object-contain bg-base-content w-full h-64"
         style={{
-          width: "100%",
-          height: "12rem",
           borderRadius: "0.5rem 0.5rem 0 0",
           marginBottom: 0,
         }}
@@ -47,9 +48,17 @@ const ContentCard = ({ data }: { data: IContentCard }) => {
             Read more
           </button>
         )}
-        <div className="card-actions justify-end">
-          <p>Comments</p>
+        <div className="card-actions justify-start">
+          {!showComments && (
+            <button
+              className="btn btn-link btn-xs"
+              onClick={() => setShowComments(true)}
+            >
+              Comments
+            </button>
+          )}
         </div>
+        {showComments && <Comments comments={data.comments} />}
       </div>
     </div>
   );
