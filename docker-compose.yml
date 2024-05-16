@@ -2,22 +2,25 @@ version: "3.8"
 
 services:
   api:
-    container_name: api
+    container_name: moneylion-api
     build:
-      context: .
-      dockerfile: api/Dockerfile
+      context: ./api
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
     volumes:
-      - ./:/app
+      - ./api:/app
     environment:
       - ENVIRONMENT=development
   ui:
-    container_name: ui
+    container_name: moneylion-ui
     build:
-      context: .
-      dockerfile: ui/Dockerfile
+      context: ./ui
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
+    volumes:
+      - ./ui:/app
+      - /app/node_modules
     environment:
       - ENVIRONMENT=development
