@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  api:
+    container_name: api
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./:/app
+    environment:
+      - ENVIRONMENT=development
+  ui:
+    container_name: ui
+    build:
+      context: .
+      dockerfile: ui/Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - ENVIRONMENT=development
